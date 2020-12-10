@@ -26,6 +26,7 @@ public class Panel extends JPanel implements Runnable {
 		List<People> p = PersonPool.getPool().getList();
 		Hospital hospital=Hospital.getHospital();
 		 int infectCount=0;
+                 int TestinfectCount=0;
 		 int incubationCount=0;
 		 int deadCount=0;
 		 int recoverPeople=0;
@@ -51,6 +52,8 @@ public class Panel extends JPanel implements Runnable {
 		for(People x : p) {
 			if(x.isInfect==1&x.dead==0) { //Number of infected people
 				infectCount++;
+                                if(x.isTest()==1)
+					TestinfectCount++;   //Number of test infected people
 				if(x.incubationCountDown>0) {   //The number of people who are infected but are in the incubation period
 					incubationCount++;
 				}
@@ -74,7 +77,7 @@ public class Panel extends JPanel implements Runnable {
 		g.setColor(new Color(0xFFFFFF));
 		g.drawString("Day: "+day, 75, 75);
 		g.setColor(new Color(0xDC143C));
-		g.drawString("Infect People: "+infectCount, 75, 95);
+		g.drawString("Test Infect People (True Infect People): "+TestinfectCount+" ("+infectCount+")", 75, 95);
 		System.out.println(infectCount);
 		g.setColor(new Color(0x0000FF));
 		g.drawString("Incubation People: "+incubationCount, 75, 115);

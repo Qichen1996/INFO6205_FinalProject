@@ -25,6 +25,7 @@ public class People {
 	int hasVaccine=0;   //Define whether the patient has recovered
 	int recoverDay=0;   //Define the number of days from illness to recovery
 	int deadBaseDay;     //Define the days from illness to death
+        double isTest=0.6;   //Define the prevalence of testing
 	
 	
 	Random r = new Random();
@@ -46,7 +47,7 @@ public class People {
 		if(r.nextDouble()<wareFaceRate) {     //The random value is less than the mask rate, and the person is wearing a mask
 			this.isWareFaceMask =1;
 		}
-		XU = x;  //Defining city boundaries
+		XU = x;  //Initial location
 		YU = y;
 	}
 	
@@ -162,6 +163,10 @@ public class People {
     		}
     	}
     }
+
+    public int isTest() {         //Whether to be tested
+		return r.nextDouble()< isTest ? 1 : 0;
+	}
     
     public double getDistance(People p) {  //distance
     	double distance=Math.sqrt(Math.pow(p.getX()-getX(),2)+Math.pow(p.getY()-getY(),2));
